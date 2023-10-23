@@ -1,4 +1,11 @@
-const validatePost = (req, res, next) => {
+const existsValidation = require("../models/userModel")
+
+
+
+    
+
+
+const validatePost = async (req, res, next) => {
     const {body} = req;
     
     const nasc = body.dataNascimento;
@@ -6,7 +13,8 @@ const validatePost = (req, res, next) => {
     const num = body.enderecoNum
     const cpf = body.cpf
     
-
+    const exist = await existsValidation.authUser(req.body)
+    if(exist.length === 0){
     // Username
     switch (body.username)
     {
@@ -216,7 +224,13 @@ const validatePost = (req, res, next) => {
         )
     }
     next()
-}
+    }else{
+        return res.status(402).json({
+            Error: "User with these credentials already exists."
+        })
+    }
+}   
+
 
 
 module.exports = {

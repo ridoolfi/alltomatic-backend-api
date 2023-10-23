@@ -24,9 +24,19 @@ const updateUser = async (req, res) => {
     return res.status(204).json(updated)
 }
 
+const authUser = async(req, res) => {
+    const user = req.body
+    const exist = await userModel.authUser(user)
+    if(exist.length === 0){
+        return res.status(402).json({msg:"User not found!"})
+    }else{
+        return res.status(200).json(exist)}
+}
+
 module.exports = {
     getUsers:getUsers,
     createUser:createUser,
     deleteUser:deleteUser,
-    updateUser: updateUser
+    updateUser: updateUser,
+    authUser: authUser
 }

@@ -1,5 +1,6 @@
 const connection = require('./connection')
 
+
 const getUser = async () => { // Função que obtem os usuários do banco de dados
     const [users] = await connection.execute('SELECT * FROM users') 
     return users
@@ -33,10 +34,18 @@ const updateUser = async (id, column, data) => {
     return updatedUser;
 }
 
+
+const authUser = async(user) => {
+    let query = `select id, username, password, nome, sobrenome, dataNascimento, enderecoCep, enderecoLogradouro, enderecoBairro, enderecoNum, enderecoComplemento, cpf, criadoEm from users where username = "${user.username}" && password = "${user.password}";`
+    const searchUser = await connection.query(query)
+    return searchUser[0]
+}
+
 module.exports = {
     getUser: getUser,
     createUser: createUser,
     deleteUser: deleteUser,
-    updateUser: updateUser
+    updateUser: updateUser,
+    authUser: authUser
 }
 
