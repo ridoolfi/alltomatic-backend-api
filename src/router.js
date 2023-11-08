@@ -7,6 +7,7 @@ const loginMiddleware = require('./middlewares/authMiddlewares');
 const postMiddlewares = require('./middlewares/postMiddlewares').validatePost;
 const deleteMiddlewares = require('./middlewares/deleteMiddlewares').validateDelete;
 const putMiddleware = require('./middlewares/putMiddlewares').validatePut;
+const dataMiddleware = require('./middlewares/dataMiddleware')
 
 router.use(cors({
     origin: "*",
@@ -36,8 +37,8 @@ router.post('/sensor/data/umidade', dataControllers.selectUmidade);
 router.post('/sensor/data/temperatura', dataControllers.selectTemperatura);
 router.post('/sensor/data/luminosidade', dataControllers.selectLuminosidade);
 
-router.post('/sensor/data/day/temperatura', dataControllers.TempByDay);
-router.post('/sensor/data/day/luminosidade', dataControllers.LumiByDay);
-router.post('/sensor/data/day/umidade', dataControllers.UmiByDay);
+router.post('/sensor/data/day/temperatura', dataMiddleware, dataControllers.TempByDay);
+router.post('/sensor/data/day/luminosidade', dataMiddleware, dataControllers.LumiByDay);
+router.post('/sensor/data/day/umidade', dataMiddleware, dataControllers.UmiByDay);
 
 module.exports = router;
