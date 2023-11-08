@@ -3,10 +3,10 @@ require('dotenv').config()
 
 
 const connection = mysql.createPool({
-    host: '186.235.2.225',
-    user: 'root',
-    password: "root",
-    database: 'alltomatic' 
+    host: process.env.MYSQL_H,
+    user: process.env.MYSQL_U,
+    password: process.env.MYSQL_PW,
+    database: process.env.MYSQL_DB 
 })
 
 module.exports = connection
