@@ -1,2 +1,2 @@
-# alltomatic-front
-Front-End do grupo que deve ser realizado até terça 26/09.
+# BackEnd-API-CRUD-Alltomatic
+Primeira Versão do código utilizado no desenvolvimento do nosso projeto para fazer CRUD em um Banco de Dados
