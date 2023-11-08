@@ -6,7 +6,7 @@ const connection = mysql.createPool({
     host: '186.235.2.225',
     user: 'root',
     password: "root",
-    database: 'root' 
+    database: 'alltomatic' 
 })
 
 module.exports = connection
