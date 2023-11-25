@@ -8,6 +8,10 @@ const postMiddlewares = require('./middlewares/postMiddlewares').validatePost;
 const deleteMiddlewares = require('./middlewares/deleteMiddlewares').validateDelete;
 const putMiddleware = require('./middlewares/putMiddlewares').validatePut;
 const dataMiddleware = require('./middlewares/dataMiddleware')
+const Login = require('./controllers/authUser').Login
+
+const login = new Login
+
 
 router.use(cors({
     origin: "*",
@@ -23,7 +27,12 @@ router.get('/Users', usersControllers.getUsers);
 router.post('/Users', postMiddlewares, usersControllers.createUser);
 router.delete('/Users/:id', deleteMiddlewares, usersControllers.deleteUser);
 router.put('/Users/', putMiddleware, usersControllers.updateUser);
-router.post('/auth/User', loginMiddleware ,usersControllers.authUser);
+
+
+
+router.post('/auth/User', loginMiddleware , (req, res) => {
+    login.AuthUser(req, res);
+})
 
 
 // * Data Routes
